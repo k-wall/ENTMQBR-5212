@@ -8,7 +8,7 @@ Create a standalone broker with `AMQ_SSL_PROVIDER=OPENSSL` specified.
 
 ` oc set image statefulset mybroker-amq mybroker-amq=registry.redhat.io/amq7/amq-broker:7.8-16.1623245297`
 
-`
+```
 2021-07-15 18:08:12,006 INFO  [org.apache.activemq.artemis.core.server] AMQ221001: Apache ActiveMQ Artemis Message Broker version 2.16.0.redhat-00012 [mybroker, nodeID=7ab22dea-e594-11eb-a8ec-0a580a800243]
 2021-07-15 18:08:12,258 INFO  [org.apache.amq.hawtio.branding.PluginContextListener] Initialized amq-broker-redhat-branding plugin
 2021-07-15 18:08:12,296 INFO  [org.apache.activemq.hawtio.plugin.PluginContextListener] Initialized artemis-plugin plugin
@@ -24,13 +24,13 @@ INFO  | main | Starting hawtio authentication filter, JAAS realm: "activemq" aut
 INFO  | main | Proxy servlet is disabled
 INFO  | main | Jolokia overridden property: [key=policyLocation, value=file:/home/jboss/mybroker/etc/jolokia-access.xml]
 2021-07-15 18:08:12,979 INFO  [org.apache.activemq.artemis] AMQ241001: HTTP Server started at https://mybroker-amq-0.mybroker-amq-headless.amq-demo.svc.cluster.local:8161
-`
+```
 
 ## Switching to current release demonstrates the issue
 
-`oc set image statefulset mybroker-amq mybroker-amq=registry.redhat.io/amq7/amq-broker:7.8`
+`oc set image statefulset mybroker-amq mybroker-amq=registry.redhat.io/amq7/amq-broker:7.8-20`
 
-`
+```
 2021-07-15 18:09:45,646 INFO  [org.apache.activemq.artemis.core.server] AMQ221080: Deploying address acme.egg.queue supporting [ANYCAST]
 2021-07-15 18:09:45,647 INFO  [org.apache.activemq.artemis.core.server] AMQ221003: Deploying ANYCAST queue acme.egg.queue on address acme.egg.queue
 2021-07-15 18:09:46,007 ERROR [org.apache.activemq.artemis.core.server] AMQ224097: Failed to start server: java.lang.NoClassDefFoundError: io/netty/internal/tcnative/SSLSessionCache
@@ -46,5 +46,5 @@ INFO  | main | Jolokia overridden property: [key=policyLocation, value=file:/hom
 	at org.apache.activemq.artemis.core.remoting.impl.netty.NettyAcceptorFactory.createAcceptor(NettyAcceptorFactory.java:43) [artemis-server-2.16.0.redhat-00022.jar:2.16.0.redhat-00022]
 	at org.apache.activemq.artemis.core.remoting.server.impl.RemotingServiceImpl.createAcceptor(RemotingServiceImpl.java:275) [artemis-server-2.16.0.redhat-00022.jar:2.16.0.redhat-00022]
 	at org.apache.activemq.artemis.core.remoting.server.impl.RemotingServiceImpl.start(RemotingServiceImpl.java:218) [artemis-server-2.16.0.redhat-00022.jar:2.16.0.redhat-00022]
-`
+```
 
